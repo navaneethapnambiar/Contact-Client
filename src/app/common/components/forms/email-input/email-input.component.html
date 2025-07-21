@@ -1,0 +1,5 @@
+<div class="form-control">
+  <label [for]="id">{{ label }}</label>
+  <input type="email" [name]="email" [id]="id" [value]="value" [placeholder]="placeholder" (blur)="onTouched()"
+    (input)="onInput($event)" [disabled]="disabled" />
+</div>

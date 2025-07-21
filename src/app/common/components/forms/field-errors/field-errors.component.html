@@ -1,0 +1,6 @@
+<ul *ngIf="shouldShowErrors()" class="list-none text-red-500 text-xs pl-2 ">
+  <li *ngFor="let error of errorsList">
+    {{ error }}
+  </li>
+</ul>
+
