@@ -1,0 +1,28 @@
+<div class="w-full relative border border-gray-300 rounded-md py-3 pl-0 pr-0 font-[Poppins] font-normal">
+  <label
+    [for]="id"
+    class="absolute -top-2.5 left-5 bg-primary px-1 h-5 text-gray-500 text-sm  font-secondary"
+    >{{ label }}</label
+  >
+  <div class="flex items-center pl-2 pr-2">
+    <input
+      *ngIf="showCountryCode"
+      type="text"
+      name="code"
+      class="w-6 border-none text-black focus:outline-none"
+    />
+    <span *ngIf="showCountryCode" class="mx-1 text-gray-400">|</span>
+    <input
+      type="tel"
+      name="phone"
+      [id]="id"
+      [value]="value"
+      [placeholder]="placeholder"
+      required
+      (blur)="onTouched()"
+      (input)="onInput($event)"
+      class="flex-1 border-none text-black focus:outline-none bg-transparent text-lg"
+    />
+  </div>
+</div>
+
