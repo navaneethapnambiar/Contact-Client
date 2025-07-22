@@ -61,7 +61,7 @@ export class LoginComponent {
         next: () => {
           console.log("Login successful");
           this.notificationService.showSuccess("Login Successful");
-          this.router.navigate(["/home"]);
+          this.router.navigate(["auth/home"]);
         },
         error: (err: unknown) => {
           console.error("Login error occurred", err);

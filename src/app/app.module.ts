@@ -8,7 +8,7 @@ import { AppComponent } from "./app.component";
 import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
 import { ToastrModule } from "ngx-toastr";
 import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthLayoutComponent } from "./modules/shared/components/auth-layout/auth-layout.component";
 import { provideHttpClient } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     ToastrModule.forRoot(),
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
