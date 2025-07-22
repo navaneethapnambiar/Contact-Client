@@ -50,10 +50,12 @@ export class SignupPageComponent {
       this.authService
         .register({ firstName, lastName, email, phoneNumber, password })
         .subscribe({
-          next: () => {
+          next: (response) => {
+            console.log("register response:",response)
             this.notificationService.showSuccess("Registration successful!");
             this.router.navigate(["/auth/login"]);
           },
+
           error: (err) => {
             const errors = err?.error?.errors;
 

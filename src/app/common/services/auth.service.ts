@@ -39,23 +39,24 @@ export class AuthService {
    */
 
   login(credentials: { email: string; password: string }): Observable<IUser> {
-  return this.http
-    .post<Result<UserInfoResponseDto>>(`${environment.apiEndpoint}/Auth/Authenticate`, credentials)
-    .pipe(
-      map((result) => {
-        if (result.success && result.data.tokenResponse?.token) {
-          this.saveUser(result.data);
-          return this.currentUserSubject.value!;
-        }
-        const msg = result.message ?? "Login failed";
-        if (result.errors && result.errors.length) {
-          throw new Error(result.errors.join(", "));
-        }
-        throw new Error(msg);
-      })
-    );
-
-
+    return this.http
+      .post<Result<UserInfoResponseDto>>(
+        `${environment.apiEndpoint}/Auth/Authenticate`,
+        credentials
+      )
+      .pipe(
+        map((result) => {
+          if (result.success && result.data.tokenResponse?.token) {
+            this.saveUser(result.data);
+            return this.currentUserSubject.value!;
+          }
+          const msg = result.message ?? "Login failed";
+          if (result.errors && result.errors.length) {
+            throw new Error(result.errors.join(", "));
+          }
+          throw new Error(msg);
+        })
+      );
   }
   /** Saves user info and token to localStorage */
   private saveUser(userDto: UserInfoResponseDto): void {
@@ -81,17 +82,20 @@ export class AuthService {
     phoneNumber: string;
     password: string;
   }): Observable<string> {
-    return this.http.post<Result<string>>(this.apiUrl, data).pipe(
-      map((result) => {
-        if (result.success && result.data) {
-          localStorage.setItem(this.userIdKey, result.data);
-          return result.data;
-        } else {
-          throw new Error(result.message ?? "Registration failed");
-        }
-      })
-    );
+    return this.http
+      .post<Result<string>>(`${environment.apiEndpoint}/Auth/register`, data)
+      .pipe(
+        map((result) => {
+          if (result.success && result.data) {
+            localStorage.setItem(this.userIdKey, result.data);
+            return result.data;
+          } else {
+            throw new Error(result.message ?? "Registration failed");
+          }
+        })
+      );
   }
+
   /**
    * Returns the stored JWT token, or null.
    */
