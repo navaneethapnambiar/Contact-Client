@@ -1,45 +1,71 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-100">
-  <div class="w-full max-w-sm p-8 bg-white rounded-lg shadow-md">
-    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">LOGIN</h2>
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-md p-5">
+    <div class="bg-white p-8 rounded-2xl shadow-lg">
+      <h2 class="text-center text-2xl font-bold mb-6">Login</h2>
 
-    <form>
-      <!-- Email Component -->
-      <app-email-input></app-email-input>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email Input -->
+        <div class="mb-4">
+          <label for="email" class="block font-medium mb-1">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div
+            class="text-red-500 text-sm mt-1"
+            *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          >
+            Please enter a valid email.
+          </div>
+        </div>
 
-      <!-- Password Component -->
-      <app-password-input></app-password-input>
+        <!-- Password Input -->
+        <div class="mb-4">
+          <label for="password" class="block font-medium mb-1">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div
+            class="text-red-500 text-sm mt-1"
+            *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          >
+            Password must be at least 6 characters.
+          </div>
+        </div>
 
-      <!-- Field Errors (generic field-level error handling) -->
-      <app-field-errors></app-field-errors>
+        <!-- Submit Button -->
+        <div class="mb-4">
+          <button
+            type="submit"
+            [disabled]="isLoading"
+            class="w-full h-12 bg-black text-white font-semibold rounded-md hover:bg-gray-800 transition disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            Login
+          </button>
+        </div>
 
-      <!-- Remember Me -->
-      <div class="flex items-center mb-6">
-        <input
-          type="checkbox"
-          id="remember"
-          class="text-pink-500 focus:ring-pink-500"
-        />
-        <label for="remember" class="ml-2 text-sm text-gray-600">Remember me?</label>
-      </div>
+        <!-- Divider -->
+        <div class="flex items-center gap-4 my-4">
+          <hr class="flex-grow border-gray-300" />
+          <span class="text-gray-500 text-sm">or</span>
+          <hr class="flex-grow border-gray-300" />
+        </div>
 
-      <!-- Login Button -->
-      <button
-        type="submit"
-        class="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-md font-semibold shadow-md"
-      >
-        LOGIN
-      </button>
-    </form>
-
-    <!-- Sign Up Redirect -->
-    <div class="mt-6 text-center">
-      <p class="text-sm text-gray-600">Need an account?</p>
-      <a
-        routerLink="/signup"
-        class="mt-2 inline-block text-pink-600 font-medium hover:underline"
-      >
-        SIGN UP
-      </a>
+        <!-- Signup Link -->
+        <p class="text-center text-sm">
+          Don’t have an account?
+          <a [routerLink]="'/auth/signup'" class="text-blue-600 hover:underline"
+            >Sign up</a
+          >
+        </p>
+      </form>
     </div>
   </div>
 </div>

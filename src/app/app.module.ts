@@ -1,19 +1,27 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './common/components/home/home.component';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { ToastrModule } from 'ngx-toastr';
-import { FieldErrorsComponent } from './common/components/forms/field-errors/field-errors.component';
-import { CommonModule } from '@angular/common';
+import { RouterModule } from "@angular/router";
+
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
+import { ToastrModule } from "ngx-toastr";
+import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule } from "@angular/forms";
+import { AuthLayoutComponent } from "./modules/shared/components/auth-layout/auth-layout.component";
+import { provideHttpClient } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, AuthLayoutComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule,
     AppRoutingModule,
     CommonModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot(),
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
@@ -21,7 +29,7 @@ import { CommonModule } from '@angular/common';
       disableConsoleLogging: false,
     }),
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
