@@ -10,8 +10,9 @@ import { ToastrModule } from "ngx-toastr";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthLayoutComponent } from "./modules/shared/components/auth-layout/auth-layout.component";
-import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { tokenInterceptor } from "./common/interceptors/token.interceptor";
 
 @NgModule({
   declarations: [AppComponent, AuthLayoutComponent],
@@ -30,7 +31,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
       disableConsoleLogging: false,
     }),
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(
+    withInterceptors([tokenInterceptor])
+  )],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

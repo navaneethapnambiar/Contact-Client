@@ -31,7 +31,6 @@ export class AuthService {
     if (savedUser) {
       this.currentUserSubject.next(JSON.parse(savedUser));
     }
-    const userId = localStorage.getItem(this.userIdKey);
   }
 
   /**
@@ -69,6 +68,7 @@ export class AuthService {
     };
 
     localStorage.setItem(this.userKey, JSON.stringify(user));
+    localStorage.setItem(this.userIdKey, userDto.userId);
     this.currentUserSubject.next(user);
   }
 
@@ -102,6 +102,11 @@ export class AuthService {
   getToken(): string | null {
     const user = this.currentUserSubject.value;
     return user ? user.tokenResponse.token : null;
+    // return localStorage.getItem(this.tokenKey)
+  }
+
+  getCurrentUserId(): string {
+    return localStorage.getItem(this.userIdKey) || "";
   }
   /**
    * Checks if user is authenticated based on the presence of a token.
